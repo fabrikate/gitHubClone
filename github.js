@@ -18,11 +18,14 @@ $(function() {
 	}
 
 	function getUserRepos() {
+		//if there are previous github repos, fade out the bullet points
+		$('li').fadeOut();
 		$.ajax({
 			url: 'https://api.github.com/users/' + username + '/repos',
 			method: 'GET',
 			success: function(data){
-				$('#repositories').append('<ul id="list">' + username + ' Github repos: </ul>');
+				$('#repositories').append('<ul id="list"> Github repos: </ul>');
+				repoList = [];
 				for (var i = 0; i < data.length; i++) {
 					repoList.push(data[i].name);
 				}
