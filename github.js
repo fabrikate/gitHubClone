@@ -18,22 +18,20 @@ $(function() {
 	}
 
 	function getUserRepos() {
-	$.ajax({
-		url: 'https://api.github.com/users/' + username + '/repos',
-		method: 'GET',
-		success: function(data){
-			$('#repositories').append('<ul id="list">' + username + ' Github repos: </ul>');
-			for (var i = 0; i < data.length; i++) {
-				repoList.push(data[i].name);
-
+		$.ajax({
+			url: 'https://api.github.com/users/' + username + '/repos',
+			method: 'GET',
+			success: function(data){
+				$('#repositories').append('<ul id="list">' + username + ' Github repos: </ul>');
+				for (var i = 0; i < data.length; i++) {
+					repoList.push(data[i].name);
+				}
+				for( var i = 0; i < repoList.length; i++) {
+					$('#list').append('<li>' + repoList[i] + '</li>');
+				}
 			}
-			console.log(repoList);
-			for( var i = 0; i < repoList.length; i++) {
-				$('#list').append('<li>' + repoList[i] + '</li>');
-			}
-		}
-	})
-}
+		})
+	}
 
 	$('#searchform').on('submit', function(e) {
 		e.preventDefault();
